@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "config.h"
+#include "Sprite.h"
 
 int main() {
     // Raylib initialization
@@ -17,7 +18,12 @@ int main() {
     // Your own initialization code here
     // ...
     // ...
-    Texture2D myTexture = LoadTexture("assets/graphics/testimage.png");
+
+    Sprite s1(100, 100, LoadTexture("assets/graphics/testimage.png"));
+
+    //Sprite* ps2 = new Sprite(10,10, LoadTexture("assets/graphics/testimage.png"));
+    //delete ps2;
+
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -27,12 +33,12 @@ int main() {
         // ...
 
         BeginDrawing();
-            // You can draw on the screen between BeginDrawing() and EndDrawing()
-            // ...
-            // ...
-            ClearBackground(WHITE);
-            DrawText("Hello, world!", 10, 10, 30, LIGHTGRAY);
-            DrawTexture(myTexture, 10, 100, WHITE);
+        // You can draw on the screen between BeginDrawing() and EndDrawing()
+        // ...
+        // ...
+        ClearBackground(WHITE);
+        s1.Draw();
+        s1.pos_x += 5;
 
         EndDrawing();
     } // Main game loop end
@@ -40,7 +46,7 @@ int main() {
     // De-initialization here
     // ...
     // ...
-    UnloadTexture(myTexture);
+
 
     // Close window and OpenGL context
     CloseWindow();
