@@ -8,5 +8,9 @@ namespace game {
     class Level {
     public:
         std::vector<std::shared_ptr<game::Sprite>> sprites;
+
+        void Draw();
+
+        void Update();
     };
 }

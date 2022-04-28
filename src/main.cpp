@@ -4,7 +4,9 @@
 #include "raylib.h"
 
 #include "config.h"
+
 #include "Sprite.h"
+#include "Level.h"
 
 int main() {
     // Raylib initialization
@@ -35,19 +37,39 @@ int main() {
     // In diesem Fall endet der Scope von s2 am Ende des Programms. Dort wird er ungültig,
     // damit erlischt die Referenz auf den Smartpointer, bzw. dessen Referenzzöhler wird decrementiert,
     // steht damit auf 0 und es erfolgt der Destructor Call und die Speicherfreigabe.
-    std::shared_ptr<Sprite> s2 = std::make_shared<Sprite>(100,
+
+    // Achtung: Hier teilen 3 Sprites die selbe Textur! Wenn von einem Sprites der Destructor aufgerufen wird, wird
+    // UnloadTexture aufgerufen und die Textur aus dem VRAM gelöscht. Das ist gaaaanz doof!
+    Texture2D texture = LoadTexture("assets/graphics/testimage.png");
+
+    std::shared_ptr<game::Sprite> s2 = std::make_shared<game::Sprite>(100,
                                                           100,
-                                                          LoadTexture("assets/graphics/testimage.png"));
+                                                          texture);
+
+    std::shared_ptr<game::Sprite> s3 = std::make_shared<game::Sprite>(200,
+                                                                      100,
+                                                                      texture);
+
+    std::shared_ptr<game::Sprite> s4 = std::make_shared<game::Sprite>(300,
+                                                                      100,
+                                                                      texture);
+
+    game::Level level1;
+    level1.sprites.push_back(s2);
+    level1.sprites.push_back(s3);
+    level1.sprites.push_back(s4);
 
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
+        // Update
+        level1.Update();
 
         BeginDrawing();
         ClearBackground(WHITE);
-        s2->Draw();
-        s2->pos_x += 5;
+        // Draw
+        level1.Draw();
         EndDrawing();
     } // Main game loop end
 
