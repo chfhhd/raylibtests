@@ -4,19 +4,23 @@
 
 #include "raylib.h"
 
-class Sprite {
-public:
-    int pos_x;
-    int pos_y;
-    Texture2D texture;
+namespace game {
+    class Sprite {
+    public:
+        int pos_x;
+        int pos_y;
+        Texture2D texture;
 
-    Sprite() = delete;
-    Sprite(int pos_x, int pos_y, Texture2D texture);
-    Sprite(int pos_x, int pos_y, std::string filename);
-    Sprite(int pos_x, int pos_y, char* filename);
+        Sprite() = delete;
 
-    ~Sprite();
+        Sprite(int pos_x, int pos_y, Texture2D texture);
 
-    void Draw() const;
-};
+        Sprite(int pos_x, int pos_y, std::string filename);
 
+        Sprite(int pos_x, int pos_y, char *filename);
+
+        ~Sprite();
+
+        void Draw() const;
+    };
+}
