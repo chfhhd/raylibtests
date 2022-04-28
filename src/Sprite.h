@@ -13,6 +13,6 @@ public:
 
     ~Sprite();
 
-    void Draw();
+    void Draw() const;
 };
 
