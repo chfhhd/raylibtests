@@ -78,8 +78,9 @@ int main() {
     active_level = level_menu;
 
     // Noch ein Level anlegen und in den Level-Vektor hinhzufügen
-    std::shared_ptr<game::Level> level2 = std::make_shared<game::Level>();
-    levels.push_back(level2);
+    std::shared_ptr<game::Level_Level1> level1 = std::make_shared<game::Level_Level1>();
+    level1->sprites.push_back(s2);
+    levels.push_back(level1);
 
 
     // Main game loop

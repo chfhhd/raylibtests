@@ -19,3 +19,8 @@ void game::Level_Menu::Update() {
 
     Level::Update();
 }
+
+void game::Level_Menu::Draw() {
+    Level::Draw();
+    DrawText("Das ist das Menu Level", 50, 50, 50, BLACK);;
+}
